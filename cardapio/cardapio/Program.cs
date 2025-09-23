@@ -18,3 +18,21 @@ var todosDias = new Disponibilidade
     HoraFim = new TimeSpan(23, 59, 59),
 };
 Console.WriteLine("Todos os dias: {0}", todosDias.EstaDisponivel());
+
+var feijoada = new Disponibilidade
+{
+    Dias = new List<int>
+    {
+       /* (int)DayOfWeek.Sunday,
+        (int)DayOfWeek.Monday,
+        (int)DayOfWeek.Tuesday,*/
+        (int)DayOfWeek.Wednesday,
+       /* (int)DayOfWeek.Thursday,
+        (int)DayOfWeek.Friday,*/
+        (int)DayOfWeek.Saturday,
+        //(int)DayOfWeek.Sunday
+    },
+    HoraInicio = new TimeSpan(11, 0, 0),
+    HoraFim = new TimeSpan(15, 30, 59),
+};
+Console.WriteLine("Feijoada os dias: {0}", feijoada.EstaDisponivel());
