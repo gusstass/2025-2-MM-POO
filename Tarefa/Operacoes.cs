@@ -66,11 +66,39 @@ public class Operacoes
 
     public void Alterar(Tarefa tarefa)
     {
+        using (var conexao = new MySqlConnection(connectionString))
+        {
+            conexao.Open();
+            string sql = @"UPDATE tarefa 
+                           SET nome = @nome, 
+                               descricao = @descricao, 
+                               dataExecucao = @dataExecucao, 
+                               status = @status
+                           WHERE id = @id";
 
+            using (var cmd = new MySqlCommand(sql, conexao))
+            {
+                cmd.Parameters.AddWithValue("@nome", tarefa.Nome);
+                cmd.Parameters.AddWithValue("@descricao", tarefa.Descricao);
+                cmd.Parameters.AddWithValue("@dataExecucao", tarefa.DataExecucao);
+                cmd.Parameters.AddWithValue("@status", tarefa.Status);
+                cmd.Parameters.AddWithValue("@id", tarefa.Id);
+
+                cmd.ExecuteNonQuery();
     }
 
     public void Excluir(int id)
     {
+            using (var conexao = new MySqlConnection(connectionString))
+        {
+            conexao.Open();
+            string sql = "DELETE FROM tarefa WHERE id = @id";
 
+            using (var cmd = new MySqlCommand(sql, conexao))
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }
